@@ -1,0 +1,15 @@
+---
+- robertdebock.bootstrap
+- robertdebock.core_dependencies
+- robertdebock.cron
+- robertdebock.buildtools
+- robertdebock.epel
+- robertdebock.python_pip
+- robertdebock.openssl
+- robertdebock.selinux
+- robertdebock.httpd
+- robertdebock.redis
+- robertdebock.remi
+- robertdebock.php
+- robertdebock.php_fpm
+- robertdebock.mysql

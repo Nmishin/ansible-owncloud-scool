@@ -1,0 +1,12 @@
+---
+roles:
+  - name: robertdebock.bootstrap
+  - name: robertdebock.buildtools
+  - name: robertdebock.epel
+  - name: robertdebock.openssl
+  - name: robertdebock.python_pip
+  - name: robertdebock.selinux
+collections:
+  - name: ansible.posix
+  - name: community.general
+  - name: community.crypto

@@ -1,0 +1,4 @@
+---
+bootstrap_wait_for_host: yes
+ansible_user: user
+bootstrap_user: user

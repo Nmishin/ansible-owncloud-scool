@@ -1,0 +1,29 @@
+---
+- name: Verify
+  hosts: all
+  become: yes
+  gather_facts: yes
+
+  vars:
+    _remi_verify_package:
+      Fedora: php-gd
+      CentOS: &verify_package php74-php-gd
+      Rocky: *verify_package
+    remi_verify_package: "{{ _remi_verify_package[ansible_distribution] }}"
+
+  tasks:
+    - name: install php
+      ansible.builtin.package:
+        name: php
+        state: present
+
+    - name: verify the version of php
+      ansible.builtin.command:
+        cmd: php --version
+      register: remi_version_of_php
+      failed_when:
+        - "'PHP 7.4' not in remi_version_of_php.stdout"
+
+    - name: install a package from the remi repository
+      ansible.builtin.package:
+        name: "{{ remi_verify_package }}"

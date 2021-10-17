@@ -1,0 +1,27 @@
+---
+- name: Verify
+  hosts: all
+  become: no
+  gather_facts: yes
+
+  vars_files:
+    ../../vars/main.yml
+
+  tasks:
+    - name: occ check
+      ansible.builtin.command:
+        cmd: php occ check
+      args:
+        chdir: "{{ owncloud_destination }}/owncloud"
+      changed_when: no
+      become: yes
+      become_user: "{{ owncloud_httpd_owner }}"
+
+    - name: get status.php
+      ansible.builtin.uri:
+        url: "http://{{ ansible_default_ipv4.address|default(ansible_all_ipv4_addresses[0]) }}/owncloud/status.php"
+      delegate_to: localhost
+      register: owncloud_get_status_php
+      until:
+        - owncloud_get_status_php is succeeded
+      retries: 30

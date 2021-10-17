@@ -1,0 +1,22 @@
+---
+- name: Verify
+  hosts: all
+  become: no
+  gather_facts: no
+
+  tasks:
+    - name: run gcc
+      ansible.builtin.command:
+        cmd: gcc --version
+
+    - name: run make
+      ansible.builtin.command:
+        cmd: make --version
+
+    - name: run shasum
+      ansible.builtin.command:
+        cmd: shasum --version
+
+    - name: run bison
+      ansible.builtin.command:
+        cmd: bison --version
